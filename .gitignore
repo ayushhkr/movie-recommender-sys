@@ -11,6 +11,3 @@ __pycache__/
 
 # macOS
 .DS_Store
-
-# If you don't want to check in your pickle models, enable this (optional):
-# *.pkl
