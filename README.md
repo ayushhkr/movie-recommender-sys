@@ -2,6 +2,8 @@
 
 A Flask-based web application that recommends movies based on similarity matching using machine learning. Enter a movie title and get 5 similar movie recommendations instantly.
 
+🌐 **Live Demo**: [https://movie-recommender-sys-zabp.onrender.com](https://movie-recommender-sys-zabp.onrender.com)
+
 ## 📋 Features
 
 - **Intelligent Recommendations**: Uses cosine similarity to find movies with similar features
@@ -226,6 +228,7 @@ This project is open source and available under the [MIT License](LICENSE).
 **Ayush Kumar**
 - GitHub: [@ayushhkr](https://github.com/ayushhkr)
 - Repository: [movie-recommender-sys](https://github.com/ayushhkr/movie-recommender-sys)
+- Live App: [https://movie-recommender-sys-zabp.onrender.com](https://movie-recommender-sys-zabp.onrender.com)
 
 ## 🙏 Acknowledgments
 
