@@ -106,36 +106,6 @@ movie-recommender-system/
    - Render will automatically install Git LFS and download the model files
    - Your app will be live at: `https://your-app-name.onrender.com`
 
-### Deploy to Heroku
-
-1. **Install Heroku CLI**
-
-2. **Login and create app**
-   ```bash
-   heroku login
-   heroku create your-app-name
-   ```
-
-3. **Install Heroku Git LFS buildpack**
-   ```bash
-   heroku buildpacks:add https://github.com/raxod502/heroku-buildpack-git-lfs
-   heroku buildpacks:add heroku/python
-   ```
-
-4. **Deploy**
-   ```bash
-   git push heroku main
-   heroku open
-   ```
-
-## 🎯 How It Works
-
-1. **User Input**: Enter a movie title in the search box
-2. **Matching**: The system finds the closest match in the database
-3. **Similarity Calculation**: Uses pre-computed cosine similarity scores
-4. **Recommendations**: Returns top 5 most similar movies
-5. **Display**: Shows recommendations in a clean, formatted list
-
 ## 🔧 Configuration
 
 ### Environment Variables
