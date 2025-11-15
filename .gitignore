@@ -1,0 +1,16 @@
+# Virtual environment
+myenv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# If you don't want to check in your pickle models, enable this (optional):
+# *.pkl

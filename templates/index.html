@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Recommendation System</title>
+  <style>
+    body {
+      background-color: #0f1115;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    h1 {
+      color: #4da3ff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    form {
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 300px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #2ecc71;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #27ae60;
+    }
+    .results {
+      margin-top: 30px;
+      background-color: #1a1d23;
+      padding: 20px;
+      border-radius: 15px;
+      width: 400px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background-color: #2b2f36;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎬 Movie Recommendation System</h1>
+
+  <form method="POST">
+    <input type="text" name="movie_name" placeholder="Enter movie name" value="{{ movie_name }}" required>
+    <button type="submit">Get Recommendations</button>
+  </form>
+
+  {% if recommendations %}
+  <div class="results">
+    <h3>Recommended Movies:</h3>
+    <ul>
+      {% for movie in recommendations %}
+      <li>{{ movie }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+</body>
+</html>
