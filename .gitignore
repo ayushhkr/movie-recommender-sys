@@ -1,13 +1,23 @@
-# Virtual environment
+# Virtual environments
+.venv/
+venv/
 myenv/
 
-# Byte-compiled / optimized / DLL files
+# Python cache
 __pycache__/
 *.py[cod]
 *$py.class
 
+# Test and coverage output
+.pytest_cache/
+.coverage
+htmlcov/
+
 # Environment variables
 .env
+
+# Notebook checkpoints
+.ipynb_checkpoints/
 
 # macOS
 .DS_Store

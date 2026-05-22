@@ -1,211 +1,104 @@
-# 🎬 Movie Recommendation System
+# Movie Matchmaker
 
-A Flask-based web application that recommends movies based on similarity matching using machine learning. Enter a movie title and get 5 similar movie recommendations instantly.
+Movie Matchmaker is a Flask web app that recommends similar films from a precomputed similarity matrix. The project started as a machine learning demo and has been upgraded to better reflect software engineering skills: modular backend code, validation, logging, automated tests, a health endpoint, and a simple JSON API.
 
-🌐 **Live Demo**: [https://movie-recommender-sys-zabp.onrender.com](https://movie-recommender-sys-zabp.onrender.com)
+## Why this project is useful in a portfolio
 
-## 📋 Features
+- It shows end-to-end ownership: data artifacts, backend logic, web UI, and deployment.
+- It demonstrates production-minded basics: app factory pattern, service layer, health check, and CI.
+- It keeps the machine learning piece understandable instead of hiding the app behind a notebook.
 
-- **Intelligent Recommendations**: Uses cosine similarity to find movies with similar features
-- **Simple Interface**: Clean, user-friendly web interface
-- **Fast Processing**: Leverages pre-computed similarity matrices for instant results
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
+## Features
 
-## 🛠️ Tech Stack
+- Search for a movie title and get five similar recommendations.
+- Handle exact matches, partial matches, and no-match scenarios gracefully.
+- Browse a cleaner interface with sample searches and suggestion links.
+- Use a JSON endpoint at `/api/recommendations?movie=Avatar`.
+- Monitor service health at `/health`.
 
-- **Backend**: Flask 3.0.3
-- **Machine Learning**: scikit-learn 1.5.2
-- **Data Processing**: pandas 2.2.3, numpy 2.1.3
-- **Production Server**: Gunicorn 23.0.0
-- **Python Version**: 3.11.9
+## Project structure
 
-## 📁 Project Structure
-
+```text
+movie-recommender-sym/
+|-- app.py
+|-- movie_recommender/
+|   |-- __init__.py
+|   |-- config.py
+|   |-- data_loader.py
+|   |-- recommender.py
+|   |-- routes.py
+|   |-- static/
+|   |   `-- style.css
+|   `-- templates/
+|       `-- index.html
+|-- tests/
+|   |-- test_app.py
+|   `-- test_recommender.py
+|-- .github/workflows/ci.yml
+|-- movie_list.pkl
+|-- similarity.pkl
+|-- requirements.txt
+`-- README.md
 ```
-movie-recommender-system/
-├── app.py                 # Main Flask application
-├── movie_list.pkl         # Preprocessed movie dataset
-├── similarity.pkl         # Precomputed similarity matrix (176 MB)
-├── templates/
-│   └── index.html        # Frontend template
-├── requirements.txt       # Python dependencies
-├── Procfile              # Deployment configuration
-├── runtime.txt           # Python version specification
-└── .gitignore            # Git ignore rules
-```
 
-## 🚀 Local Setup & Installation
+## Local setup
 
 ### Prerequisites
-- Python 3.11.9 or higher
-- Git
-- Git LFS (for large model files)
 
-### Installation Steps
+- Python 3.11+
+- Git LFS
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/ayushhkr/movie-recommender-sys.git
-   cd movie-recommender-sys
-   ```
-
-2. **Install Git LFS** (if not already installed)
-   ```bash
-   git lfs install
-   git lfs pull
-   ```
-
-3. **Create a virtual environment**
-   ```bash
-   # On Windows
-   python -m venv myenv
-   myenv\Scripts\activate
-
-   # On macOS/Linux
-   python3 -m venv myenv
-   source myenv/bin/activate
-   ```
-
-4. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-5. **Run the application**
-   ```bash
-   # Development mode
-   python app.py
-   ```
-
-6. **Open in browser**
-   ```
-   http://localhost:5000
-   ```
-
-## 🌐 Deployment
-
-### Deploy to Render
-
-1. **Fork/Push this repository to GitHub**
-
-2. **Sign up/Login to [Render](https://render.com)**
-
-3. **Create a new Web Service**
-   - Connect your GitHub repository
-   - Select the `movie-recommender-sys` repository
-
-4. **Configure the service**
-   - **Name**: `movie-recommender-system`
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
-   - **Instance Type**: Choose based on your needs (Free tier available)
-
-5. **Deploy**
-   - Click "Create Web Service"
-   - Render will automatically install Git LFS and download the model files
-   - Your app will be live at: `https://your-app-name.onrender.com`
-
-## 🔧 Configuration
-
-### Environment Variables
-
-The app uses the following environment variables (optional):
-
-- `PORT`: Server port (default: 5000)
-- `FLASK_DEBUG`: Enable debug mode (default: disabled for production)
-
-Set via Render dashboard or `.env` file locally:
-```bash
-PORT=5000
-FLASK_DEBUG=0
-```
-
-## 📊 Model Information
-
-- **movie_list.pkl**: Contains movie metadata and titles (~11 MB)
-- **similarity.pkl**: Precomputed cosine similarity matrix (~176 MB)
-- Both files are tracked using Git LFS for efficient version control
-
-## 🧪 Testing Locally
+### Install and run
 
 ```bash
-# Activate virtual environment
-myenv\Scripts\activate  # Windows
-source myenv/bin/activate  # macOS/Linux
-
-# Run the app
-python app.py
-
-# Test in browser
-# Navigate to http://localhost:5000
-# Try searching: "Avatar", "Inception", "The Dark Knight"
-```
-
-## 🐛 Troubleshooting
-
-### Git LFS Issues
-```bash
-# Reinstall Git LFS
-git lfs install --force
-
-# Pull LFS files
+git clone https://github.com/ayushhkr/movie-recommender-sys.git
+cd movie-recommender-sys
+git lfs install
 git lfs pull
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
 ```
 
-### Missing Dependencies
+Open `http://localhost:5000`.
+
+## Testing
+
+Run the full test suite with:
+
 ```bash
-pip install -r requirements.txt --upgrade
+python -m unittest discover -s tests
 ```
 
-### Port Already in Use
+The GitHub Actions workflow in `.github/workflows/ci.yml` runs the same command on each push and pull request.
+
+## Model artifacts
+
+- `movie_list.pkl` stores the processed movie metadata.
+- `similarity.pkl` stores the precomputed similarity matrix used at request time.
+- `movie-recommend .ipynb` contains the earlier experimentation workflow and can be turned into a dedicated training script later.
+
+## Engineering improvements made
+
+- Refactored the original single-file Flask app into a package.
+- Added a recommendation service and a safer data loading layer.
+- Removed `print()` debugging in favor of application logging.
+- Added API and health endpoints for easier testing and deployment checks.
+- Moved styling into a dedicated static file and improved the UI states.
+- Added automated tests for both the recommendation logic and Flask routes.
+- Added CI to run the tests automatically.
+
+## Deployment
+
+This app is compatible with the existing `Procfile` and can still be deployed with:
+
 ```bash
-# Change port in app.py or set environment variable
-set PORT=8000  # Windows
-export PORT=8000  # macOS/Linux
+gunicorn app:app
 ```
 
-### Model Files Not Found
-Ensure Git LFS pulled the files:
-```bash
-git lfs ls-files
-# Should show: movie_list.pkl and similarity.pkl
-```
+## Next improvements
 
-## 📝 Development
-
-To modify the recommendation algorithm:
-
-1. Update the similarity computation in your data preprocessing script
-2. Regenerate `similarity.pkl`
-3. Test locally with `python app.py`
-4. Commit and push changes
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👤 Author
-
-**Ayush Kumar**
-- GitHub: [@ayushhkr](https://github.com/ayushhkr)
-- Repository: [movie-recommender-sys](https://github.com/ayushhkr/movie-recommender-sys)
-- Live App: [https://movie-recommender-sys-zabp.onrender.com](https://movie-recommender-sys-zabp.onrender.com)
-
-## 🙏 Acknowledgments
-
-- Movie dataset sourced from [TMDB/IMDb]
-- Built with Flask and scikit-learn
-- Deployed on Render
-
----
-
-⭐ Star this repo if you found it helpful!
+- Convert the notebook into a reproducible training script.
+- Add metadata such as posters, genres, and release year to each recommendation.
+- Add caching or faster lookup structures if the dataset grows.

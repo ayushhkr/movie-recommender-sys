@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Matchmaker</title>
+  <meta
+    name="description"
+    content="A Flask movie recommendation app that suggests similar titles from a precomputed similarity matrix."
+  >
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero-card">
+      <p class="eyebrow">Portfolio Project</p>
+      <h1>Movie Matchmaker</h1>
+      <p class="intro">
+        Search for a film you love and get a shortlist of similar titles. This version is structured
+        like a small production app, with validation, health checks, and a JSON API.
+      </p>
+
+      <form class="search-form" method="POST" action="{{ url_for('main.index') }}">
+        <label class="label" for="movie_name">Movie title</label>
+        <div class="search-row">
+          <input
+            id="movie_name"
+            name="movie_name"
+            type="text"
+            placeholder="Try Inception"
+            value="{{ movie_name }}"
+            list="sample-movies"
+            autocomplete="off"
+            required
+          >
+          <button type="submit">Get Recommendations</button>
+        </div>
+        <datalist id="sample-movies">
+          {% for movie in sample_movies %}
+          <option value="{{ movie }}">
+          {% endfor %}
+        </datalist>
+      </form>
+
+      <div class="sample-strip">
+        <span>Sample searches</span>
+        {% for movie in sample_movies %}
+        <a href="{{ url_for('main.index', movie=movie) }}">{{ movie }}</a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="results-grid">
+      <article class="status-card">
+        <h2>App Status</h2>
+        {% if app_ready %}
+        <p class="status-ok">Recommendation engine loaded and ready.</p>
+        <p class="status-copy">Also available at <code>/api/recommendations?movie=Avatar</code> and <code>/health</code>.</p>
+        {% else %}
+        <p class="status-error">{{ result.error }}</p>
+        <p class="status-copy">Check that the model artifacts exist and match the expected dataset.</p>
+        {% endif %}
+      </article>
+
+      <article class="results-card">
+        <div class="results-header">
+          <h2>Recommendations</h2>
+          {% if result.selected_title %}
+          <p>Based on <strong>{{ result.selected_title }}</strong></p>
+          {% else %}
+          <p>Results appear here after a search.</p>
+          {% endif %}
+        </div>
+
+        {% if result.error and app_ready %}
+        <div class="message-banner">
+          <p>{{ result.error }}</p>
+        </div>
+        {% endif %}
+
+        {% if result.suggestions %}
+        <div class="suggestions">
+          {% for suggestion in result.suggestions %}
+          <a href="{{ url_for('main.index', movie=suggestion) }}">{{ suggestion }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if result.recommendations %}
+        <ol class="recommendation-list">
+          {% for movie in result.recommendations %}
+          <li>
+            <span class="rank">0{{ loop.index }}</span>
+            <div>
+              <p class="movie-title">{{ movie }}</p>
+              <p class="movie-copy">Similar audience signals and metadata patterns.</p>
+            </div>
+          </li>
+          {% endfor %}
+        </ol>
+        {% else %}
+        <div class="empty-state">
+          <p>No recommendations yet. Start with one of the sample searches to see the app in action.</p>
+        </div>
+        {% endif %}
+      </article>
+    </section>
+  </main>
+</body>
+</html>
