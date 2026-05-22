@@ -39,7 +39,7 @@ class FlaskAppTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         page = response.get_data(as_text=True)
-        self.assertIn("Movie Matchmaker", page)
+        self.assertIn("Movie Recommender System", page)
         self.assertIn("Results appear here after a search.", page)
 
     def test_api_recommendations_returns_json_payload(self):

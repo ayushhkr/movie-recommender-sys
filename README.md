@@ -1,6 +1,6 @@
-# Movie Matchmaker
+# Movie Recommender System
 
-Movie Matchmaker is a Flask web app that recommends similar films from a precomputed similarity matrix. The project started as a machine learning demo and has been upgraded to better reflect software engineering skills: modular backend code, validation, logging, automated tests, a health endpoint, and a simple JSON API.
+Movie Recommender System is a Flask web app that recommends similar films from a precomputed similarity matrix. The project started as a machine learning demo and has been upgraded to better reflect software engineering skills: modular backend code, validation, logging, automated tests, a health endpoint, and a simple JSON API.
 
 ## Why this project is useful in a portfolio
 
