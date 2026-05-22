@@ -2,6 +2,8 @@
 
 Movie Recommender System is a Flask web app that recommends similar films from a precomputed similarity matrix. The project started as a machine learning demo and has been upgraded to better reflect software engineering skills: modular backend code, validation, logging, automated tests, a health endpoint, and a simple JSON API.
 
+Live demo: https://movie-recommender-sys-zabp.onrender.com
+
 ## Why this project is useful in a portfolio
 
 - It shows end-to-end ownership: data artifacts, backend logic, web UI, and deployment.
@@ -96,6 +98,10 @@ This app is compatible with the existing `Procfile` and can still be deployed wi
 ```bash
 gunicorn app:app
 ```
+
+Current deployed app:
+
+https://movie-recommender-sys-zabp.onrender.com
 
 ## Next improvements
 
