@@ -91,10 +91,7 @@
           {% for movie in result.recommendations %}
           <li>
             <span class="rank">0{{ loop.index }}</span>
-            <div>
-              <p class="movie-title">{{ movie }}</p>
-              <p class="movie-copy">Similar audience signals and metadata patterns.</p>
-            </div>
+            <p class="movie-title">{{ movie }}</p>
           </li>
           {% endfor %}
         </ol>
